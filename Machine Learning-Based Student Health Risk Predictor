@@ -1,0 +1,90 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOjsdnUN6H4QO5Q0zJ/OMHs",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/nandan25bai10609-aiml/Student-Health-Risk-Predictor-AI-Based-/blob/main/Machine%20Learning-Based%20Student%20Health%20Risk%20Predictor\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "from sklearn.tree import DecisionTreeClassifier\n",
+        "\n",
+        "data = {\n",
+        "    'Sleep': [4, 6, 8, 5, 7],\n",
+        "    'Screen': [8, 6, 4, 7, 5],\n",
+        "    'Exercise': [0, 1, 1, 0, 1],\n",
+        "    'Stress': [9, 7, 3, 8, 4],\n",
+        "    'Risk': ['High', 'Medium', 'Low', 'High', 'Low']}\n",
+        "\n",
+        "df = pd.DataFrame(data)\n",
+        "\n",
+        "X = df[['Sleep', 'Screen', 'Exercise', 'Stress']]\n",
+        "buffer = df['Risk']\n",
+        "\n",
+        "model = DecisionTreeClassifier()\n",
+        "model.fit(X, buffer)\n",
+        "\n",
+        "sleep = int(input(\"Enter sleep hours: \"))\n",
+        "screen = int(input(\"Enter screen time: \"))\n",
+        "exercise = int(input(\"Exercise (0/1): \"))\n",
+        "stress = int(input(\"Stress level (1-10): \"))\n",
+        "\n",
+        "prediction = model.predict([[sleep, screen, exercise, stress]])\n",
+        "\n",
+        "print(\"Health Risk Level:\", prediction[0])"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "4FklWQjddio_",
+        "outputId": "ecf91f27-5976-47e2-bed0-86da9034dba7"
+      },
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Enter sleep hours: 8\n",
+            "Enter screen time: 2\n",
+            "Exercise (0/1): 1\n",
+            "Stress level (1-10): 1\n",
+            "Health Risk Level: Low\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but DecisionTreeClassifier was fitted with feature names\n",
+            "  warnings.warn(\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
